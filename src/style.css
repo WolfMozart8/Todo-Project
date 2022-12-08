@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+}
+.main {
+    border: 1px solid black;
+}
+.task {
+    display: flex;
+    flex-direction: column;
+}
+.title-section {
+    display: flex;
+    align-items: center;
+}
+.task-content {
+    display: flex;
+    align-items: center;
+}
+#content {
+    display: flex;
+}
+
+.list {
+    text-align: center;
+    flex-grow: 1;
+}
+.main-task {
+    flex-grow: 5;
+    margin: 10% 10% 30%;
+}
