@@ -31,21 +31,64 @@ function addInputs () {
     return addDiv;
 }
 
-function task () {
+function task (arr) {
+    // const mainTask = document.createElement("DIV");
+    // const text = document.createElement("P");
+
+    // const iconsDiv = document.createElement("DIV");
+    // const deleteBtn = document.createElement("BUTTON");
+
+
+
+    for (let i = 0; i < arr.length; i++) {
+        const element = arr[i];
+        const taskDiv = document.createElement("DIV");
+        const mainTask = document.createElement("DIV");
+        const text = document.createElement("P");
+        const iconsDiv = document.createElement("DIV");
+        const deleteBtn = document.createElement("BUTTON");
+        
+        taskDiv.classList.add("task");
+        mainTask.classList.add("main-task");
+        iconsDiv.classList.add("icons");
+        deleteBtn.classList.add("delete-task");
+
+        text.textContent = element;
+        deleteBtn.textContent = "x";
+    
+        mainTask.appendChild(text);
+        iconsDiv.appendChild(deleteBtn);
+    
+        taskDiv.appendChild(mainTask);
+        taskDiv.appendChild(iconsDiv);
+
+        mainContent.appendChild(taskDiv);
+    
+    }
+}
+
+
+
+export default function dom (date, arr) {
+    mainContent.appendChild(dateTitle(date));
+    mainContent.appendChild(addInputs());
+    task(arr);
+}
+
+
+export function taskDom (taskText) {
     const taskDiv = document.createElement("DIV");
     const mainTask = document.createElement("DIV");
     const text = document.createElement("P");
-
     const iconsDiv = document.createElement("DIV");
     const deleteBtn = document.createElement("BUTTON");
-
+    
     taskDiv.classList.add("task");
     mainTask.classList.add("main-task");
     iconsDiv.classList.add("icons");
     deleteBtn.classList.add("delete-task");
 
-
-    text.textContent = "task here";
+    text.textContent = taskText;
     deleteBtn.textContent = "x";
 
     mainTask.appendChild(text);
@@ -54,11 +97,10 @@ function task () {
     taskDiv.appendChild(mainTask);
     taskDiv.appendChild(iconsDiv);
 
-    return taskDiv;
-}
+    mainContent.appendChild(taskDiv);
 
-export default function dom () {
-    mainContent.appendChild(dateTitle("november 45"));
-    mainContent.appendChild(addInputs());
-    mainContent.appendChild(task());
+    // Add remove behaivour
+    deleteBtn.addEventListener("click", (e) => {
+    e.target.parentElement.parentElement.remove()
+    })
 }
