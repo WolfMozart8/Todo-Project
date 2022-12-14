@@ -7,6 +7,6 @@ const month = months[date.getMonth()];
 const year = date.getFullYear();
 
 export default function newDay () {
-    const today = `${day} ${date.getDay()}, ${month} ${year}`;
+    const today = `${day} ${date.getDate()}, ${month} ${year}`;
     return today;
 }
