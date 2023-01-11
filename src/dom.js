@@ -1,32 +1,24 @@
 const mainContent = document.querySelector(".main-content");
 
-function dateTitle (text) {
-    const dateDiv = document.createElement("DIV");
-    const h2 = document.createElement("H2");
-
-    dateDiv.classList.add("date");
-
-    h2.textContent = text;
-    dateDiv.appendChild(h2);
-
-    // const final = dateDiv.appendChild(h2);
-    return dateDiv;
-}
 
 function addInputs () {
     const addDiv = document.createElement("DIV");
     const input = document.createElement("INPUT");
+        const date = document.createElement("INPUT")
     const btn = document.createElement("BUTTON");
 
     addDiv.classList.add("add");
     input.classList.add("add-input");
+    date.classList.add("date-input")
     btn.classList.add("add-btn");
 
     input.setAttribute("placeholder", "Add new task")
+    date.setAttribute("type", "date");
     btn.textContent = "+";
 
     addDiv.appendChild(input);
     addDiv.appendChild(btn);
+    addDiv.appendChild(date);
 
     return addDiv;
 }
@@ -69,8 +61,8 @@ function task (arr) {
 
 
 
-export default function dom (date, arr) {
-    mainContent.appendChild(dateTitle(date));
+export default function dom (arr) {
+
     mainContent.appendChild(addInputs());
     task(arr);
 }
