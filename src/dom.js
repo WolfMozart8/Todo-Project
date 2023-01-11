@@ -5,6 +5,7 @@ function addInputs () {
     const addDiv = document.createElement("DIV");
     const input = document.createElement("INPUT");
         const date = document.createElement("INPUT")
+
     const btn = document.createElement("BUTTON");
 
     addDiv.classList.add("add");
@@ -14,13 +15,46 @@ function addInputs () {
 
     input.setAttribute("placeholder", "Add new task")
     date.setAttribute("type", "date");
+    
     btn.textContent = "+";
 
+
+    const priorList = priorityList();
     addDiv.appendChild(input);
-    addDiv.appendChild(btn);
     addDiv.appendChild(date);
+    addDiv.appendChild(priorList);
+    addDiv.appendChild(btn);
 
     return addDiv;
+}
+
+function priorityList () {
+    const select = document.createElement("SELECT");
+    select.classList.add("select");
+
+    const priority = document.createElement("OPTION");
+    const low = document.createElement("OPTION");
+    const mid = document.createElement("OPTION");
+    const high = document.createElement("OPTION");
+
+    priority.value = "priority";
+    priority.textContent = "priority";
+    priority.setAttribute("selected", "");
+    priority.setAttribute("disabled", "");
+
+    low.value = "low";
+    low.textContent = "low";
+    mid.value = "mid";
+    mid.textContent = "mid";
+    high.value = "high";
+    high.textContent = "high";
+
+    select.appendChild(priority);
+    select.appendChild(low);
+    select.appendChild(mid);
+    select.appendChild(high);
+
+    return select;
 }
 
 function task (arr) {
