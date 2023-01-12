@@ -60,14 +60,6 @@ function priorityList () {
 }
 
 function task (arr) {
-    // const mainTask = document.createElement("DIV");
-    // const text = document.createElement("P");
-
-    // const iconsDiv = document.createElement("DIV");
-    // const deleteBtn = document.createElement("BUTTON");
-
-
-
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i].task;
         const taskDiv = document.createElement("DIV");
@@ -97,17 +89,23 @@ function task (arr) {
 
 
 
-export default function dom (arr) {
-
+export default function dom (projetTitle, arr) {
+    const title = document.createElement("H2");
+    title.textContent = projetTitle;
+    mainContent.appendChild(title)
     mainContent.appendChild(addInputs());
     task(arr);
 }
 
 
-export function taskDom (taskText) {
+export function taskDom (taskText, date) {
+    
+    const dateString = date === "" ? "" : new Date(date).toDateString();
+
     const taskDiv = document.createElement("DIV");
     const mainTask = document.createElement("DIV");
     const text = document.createElement("P");
+    const textDate = document.createElement("P");
     const iconsDiv = document.createElement("DIV");
     const deleteBtn = document.createElement("BUTTON");
     
@@ -117,9 +115,13 @@ export function taskDom (taskText) {
     deleteBtn.classList.add("delete-task");
 
     text.textContent = taskText;
+
+    
+    textDate.textContent = dateString;
     deleteBtn.textContent = "x";
 
     mainTask.appendChild(text);
+    mainTask.appendChild(textDate)
     iconsDiv.appendChild(deleteBtn);
 
     taskDiv.appendChild(mainTask);
