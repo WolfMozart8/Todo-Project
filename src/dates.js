@@ -24,7 +24,6 @@ const minM = () => {
     }
 }
 
-console.log(date.getMonth())
 const minDate = `${minY}-${minM()}-${minD()}`;
 
 export default function newDay () {

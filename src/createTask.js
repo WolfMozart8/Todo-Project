@@ -26,4 +26,11 @@ exampleList.addTask("Brush teeths", "03-03-2023", "low")
 exampleList.addTask("Take a walk", "03-03-2023", "low")
 exampleList.addTask("Make the bed", "03-03-2023", "low")
 
-console.log(tasksMain)
+// const todoBtn = document.querySelector(".todo-btn");
+
+// todoBtn.addEventListener("click", () => {
+//     const todoInput = document.querySelector(".todo-input");
+//     const newTodo = CreateList(todoInput.value);
+//     tasksMain.push(newTodo);
+//     console.log(tasksMain)
+// }) 

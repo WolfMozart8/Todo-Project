@@ -1,15 +1,17 @@
-import dom from "./dom";
+import dom, {taskDom, todosMiniList, addTodoMini} from "./dom";
 import { minDate } from "./dates";
-import { taskDom } from "./dom";
-import {tasksMain} from "./createTask";
+import {CreateList, tasksMain} from "./createTask";
 
+todosMiniList();
 dom(tasksMain[0].name, tasksMain[0].tasks)
-
+const sideTasksList = document.getElementById("todos");
 const addInput = document.querySelector(".add-input");
 const dateInput = document.querySelector(".date-input");
 const prioInput = document.querySelector(".select");
 const btn = document.querySelector(".add-btn");
 const deleteBtn = document.querySelectorAll(".delete-task");
+
+addTodoMini(tasksMain, sideTasksList);
 
 dateInput.setAttribute("min", minDate);
 
@@ -25,14 +27,8 @@ function addTaskFromInput () {
         const t = addInput.value;
         const d = dateInput.value;
         const p = prioInput.value;
-
+        
         taskDom(addInput.value, d);
-
-
-        // if (d === ""){
-        //     t = minDate;
-        // }
-
 
         tasksMain[0].addTask(t, d, p);
         addInput.value = "";
@@ -52,5 +48,3 @@ deleteBtn.forEach(e => {
         e.parentElement.parentElement.remove();
     })
 })
-
-console.log(tasksMain)

@@ -1,5 +1,5 @@
 const mainContent = document.querySelector(".main-content");
-
+const contentDiv = document.getElementById("content");
 
 function addInputs () {
     const addDiv = document.createElement("DIV");
@@ -94,6 +94,7 @@ export default function dom (projetTitle, arr) {
     title.textContent = projetTitle;
     mainContent.appendChild(title)
     mainContent.appendChild(addInputs());
+    contentDiv.appendChild(mainContent);
     task(arr);
 }
 
@@ -133,4 +134,57 @@ export function taskDom (taskText, date) {
     deleteBtn.addEventListener("click", (e) => {
     e.target.parentElement.parentElement.remove()
     })
+}
+
+export function todosMiniList () {
+    const MainTodosDiv = document.createElement("DIV");
+    const newTodo = document.createElement("DIV");
+        const todoInput = document.createElement("INPUT");
+        const todoBtn = document.createElement("BUTTON");
+
+    todoBtn.textContent = "+";
+
+    MainTodosDiv.setAttribute("id", "todos");
+    newTodo.classList.add("new-todo");
+    todoInput.classList.add("todo-input");
+    todoBtn.classList.add("todo-btn");
+
+
+
+    newTodo.appendChild(todoInput);
+    newTodo.appendChild(todoBtn);
+    MainTodosDiv.appendChild(newTodo);
+
+    contentDiv.appendChild(MainTodosDiv);
+}
+
+function todoMini (title, arr) {
+    const todo = document.createElement("DIV");
+    const TodoList = document.createElement("UL");
+    const todoTitle = document.createElement("h3");
+    todoTitle.textContent = title;
+    const minlenght = arr.length < 3 ? arr.length : 3;
+
+
+    //class
+    todo.classList.add("todo");
+    todoTitle.classList.add("todo-title");
+    TodoList.classList.add("todo-minilist");
+
+    for (let i = 0; i < minlenght ; i++) {
+        const taskItem = document.createElement("LI");
+        taskItem.textContent = arr[i].task;
+        taskItem.classList.add("task-mini");
+        TodoList.appendChild(taskItem);
+    }
+    todo.appendChild(todoTitle);
+    todo.appendChild(TodoList);
+
+    return todo;    
+}
+
+export function addTodoMini (arr, div) {
+    for (let i = 0; i < arr.length; i++) {
+        div.appendChild(todoMini(arr[i].name, arr[i].tasks))
+    }
 }
