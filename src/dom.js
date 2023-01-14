@@ -114,6 +114,7 @@ export function taskDom (taskText, date) {
     mainTask.classList.add("main-task");
     iconsDiv.classList.add("icons");
     deleteBtn.classList.add("delete-task");
+    textDate.classList.add("text-date")
 
     text.textContent = taskText;
 
@@ -158,11 +159,16 @@ export function todosMiniList () {
     contentDiv.appendChild(MainTodosDiv);
 }
 
-function todoMini (title, arr) {
+export function todoMini (title, arr) {
     const todo = document.createElement("DIV");
     const TodoList = document.createElement("UL");
+    const titleDiv = document.createElement("DIV");
     const todoTitle = document.createElement("h3");
+    const miniBtn = document.createElement("BUTTON");
+
     todoTitle.textContent = title;
+    miniBtn.textContent = "select";
+
     const minlenght = arr.length < 3 ? arr.length : 3;
 
 
@@ -170,6 +176,7 @@ function todoMini (title, arr) {
     todo.classList.add("todo");
     todoTitle.classList.add("todo-title");
     TodoList.classList.add("todo-minilist");
+    miniBtn.classList.add("mini-btn");
 
     for (let i = 0; i < minlenght ; i++) {
         const taskItem = document.createElement("LI");
@@ -177,9 +184,12 @@ function todoMini (title, arr) {
         taskItem.classList.add("task-mini");
         TodoList.appendChild(taskItem);
     }
-    todo.appendChild(todoTitle);
+    titleDiv.appendChild(todoTitle);
+    titleDiv.appendChild(miniBtn);
+    todo.appendChild(titleDiv);
     todo.appendChild(TodoList);
 
+    
     return todo;    
 }
 
