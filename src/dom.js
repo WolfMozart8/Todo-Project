@@ -156,6 +156,7 @@ export function todosMiniList () {
     MainTodosDiv.setAttribute("id", "todos");
     newTodo.classList.add("new-todo");
     todoInput.classList.add("todo-input");
+    todoInput.setAttribute("placeholder", "Create new ToDo list")
     todoBtn.classList.add("todo-btn");
 
 
@@ -166,7 +167,7 @@ export function todosMiniList () {
 
     contentDiv.appendChild(MainTodosDiv);
 }
-
+// shows tasks in mini list (max 3)
 export function todoMini (title, arr) {
     const todo = document.createElement("DIV");
     const TodoList = document.createElement("UL");
@@ -174,8 +175,14 @@ export function todoMini (title, arr) {
     const todoTitle = document.createElement("h3");
     const miniBtn = document.createElement("BUTTON");
 
+    const reminderText = document.createElement("P");
+    const reminderTasks = arr.length -3 < 0 ? 0 : arr.length -3;
+
     todoTitle.textContent = title;
     miniBtn.textContent = "select";
+    reminderText.textContent = `${reminderTasks} task(s) more`;
+    reminderText.setAttribute("style", "text-align: center;")
+    
 
     const minlenght = arr.length < 3 ? arr.length : 3;
 
@@ -197,6 +204,7 @@ export function todoMini (title, arr) {
     titleDiv.appendChild(miniBtn);
     todo.appendChild(titleDiv);
     todo.appendChild(TodoList);
+    todo.appendChild(reminderText);
 
     
     return todo;    

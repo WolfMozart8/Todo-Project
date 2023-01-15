@@ -1,6 +1,7 @@
 import dom, {taskDom, todosMiniList, addTodoMini, todoMini} from "./dom";
 import { minDate } from "./dates";
 import {CreateList, tasksMain} from "./createTask";
+import { deleteTodoMini } from "./refresh";
 
 
 let actualIndex = 0;
@@ -22,8 +23,18 @@ addTodoMini(tasksMain, sideTasksList);
 
 dateInput.setAttribute("min", minDate);
 
-window.addEventListener("keydown", e => {if(e.keyCode === 13){
-    addTaskFromInput();
+window.addEventListener("keydown", e => {
+    const addInputFocus = document.querySelector(".add-input:focus");
+    const todoInputFocus = document.querySelector(".todo-input:focus");
+
+    if(e.keyCode === 13){
+        if (addInputFocus) {
+            addTaskFromInput();
+        }
+        else if (todoInputFocus) {
+            addTodoList()
+        }
+
 }})
 
 btn.addEventListener("click", addTaskFromInput)
@@ -51,6 +62,9 @@ function addTaskFromInput () {
 
         const last = document.querySelector(".task:last-of-type")
         last.classList.add(`priority-${p}`);
+            // refresh minilist
+        deleteTodoMini();
+        addTodoMini(tasksMain, sideTasksList)
     }
     else {
         console.log("MMMMmmm ");
@@ -68,13 +82,14 @@ deleteBtn.forEach(e => {
 todoBtn.addEventListener("click", addTodoList)
 
 function addTodoList () {
-if (todoInput !== "") {
+if (todoInput.value !== "") {
     const newTodo = CreateList(todoInput.value);
     tasksMain.push(newTodo);
     const lenghtMain = tasksMain.length - 1;
     sideTasksList.appendChild(todoMini(todoInput.value, tasksMain[lenghtMain].tasks))
 
-    const todos = document.querySelectorAll(".todo");
+    // const todos = document.querySelectorAll(".todo-title-div h3");
+    const todoListener = document.querySelector(".todo:last-of-type")
     const selectBtn = document.querySelectorAll(".mini-btn");
     const todosArr = Array.from(selectBtn);
     
@@ -98,16 +113,22 @@ if (todoInput !== "") {
         }
     })
 
-    todos.forEach(todo => {
-        // add class and click event once
-        if (!todo.classList.contains("listener")) {
-        todo.addEventListener("click", () => {
-            todo.classList.add("listener");
-            todo.classList.toggle("open-list");
+    // todos.forEach(todo => {
+    //     // add class and click event once
+    //     if (!todo.classList.contains("listener")) {
+        todoListener.addEventListener("click", (e) => {
+            const h3 = e.target.classList.contains("todo-title");
+
+            if (h3) {
+            e.target.classList.toggle("open-list");
+            console.log(h3)
             // actual = todosArr.indexOf(todo);
-        })
         }
     })
+    //     } else {
+    //         console.log("ups")
+    //     }
+    // })
 
 
 
