@@ -34,10 +34,16 @@ function addTaskFromInput () {
     const dateInput = document.querySelector(".date-input");
     const prioInput = document.querySelector(".select");
     if (addInput.value != "") {
+        // t = task, d = date, p = priority
         const t = addInput.value;
-        const d = dateInput.value;
+        let d = dateInput.value;
         const p = prioInput.value;
         
+        if (d == "") {
+            d = minDate;
+            console.log(d, minDate)
+        }
+
         taskDom(addInput.value, d);
 
         tasksMain[actualIndex].addTask(t, d, p);
@@ -65,40 +71,40 @@ function addTodoList () {
 if (todoInput !== "") {
     const newTodo = CreateList(todoInput.value);
     tasksMain.push(newTodo);
-    console.log(tasksMain);
     const lenghtMain = tasksMain.length - 1;
     sideTasksList.appendChild(todoMini(todoInput.value, tasksMain[lenghtMain].tasks))
 
     const todos = document.querySelectorAll(".todo");
     const selectBtn = document.querySelectorAll(".mini-btn");
-    const todosArr = Array.from(todos);
-    let actual = 0;
+    const todosArr = Array.from(selectBtn);
     
-    todos.forEach(todo => {
-        // add class and click event once
-        if (!todo.classList.contains("listener")) {
-        todo.addEventListener("click", () => {
-            todo.classList.add("listener")
-            actual = todosArr.indexOf(todo);
-        })
-        }
-    })
+
     selectBtn.forEach(btn => {
                 // add class and click event once
         if (!btn.classList.contains("listener-btn")) {
         btn.addEventListener("click", () => {
             btn.classList.add("listener-btn");
-            actualIndex = actual;
-            console.log(actualIndex);
+            actualIndex = todosArr.indexOf(btn)
 
             while (mainContent.hasChildNodes()) {
                 mainContent.removeChild(mainContent.firstChild);
                 }
 
-            dom(tasksMain[actual].name, tasksMain[actual].tasks)
+            dom(tasksMain[actualIndex].name, tasksMain[actualIndex].tasks)
             
-            const lv = document.querySelector(".add-btn:last-of-type");
-            lv.addEventListener("click", addTaskFromInput)
+            const lastBtn = document.querySelector(".add-btn:last-of-type");
+            lastBtn.addEventListener("click", addTaskFromInput)
+        })
+        }
+    })
+
+    todos.forEach(todo => {
+        // add class and click event once
+        if (!todo.classList.contains("listener")) {
+        todo.addEventListener("click", () => {
+            todo.classList.add("listener");
+            todo.classList.toggle("open-list");
+            // actual = todosArr.indexOf(todo);
         })
         }
     })

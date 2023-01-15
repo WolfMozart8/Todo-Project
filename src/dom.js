@@ -31,18 +31,24 @@ function addInputs () {
 }
 
 function priorityList () {
+    const selectDiv = document.createElement("DIV");
+    selectDiv.classList.add("select-div");
     const select = document.createElement("SELECT");
     select.classList.add("select");
+    select.setAttribute("id", "select");
+    const selectLabel = document.createElement("LABEL");
+    selectLabel.setAttribute("for", "select");
+    selectLabel.textContent = "Priority: ";
 
-    const priority = document.createElement("OPTION");
+    // const priority = document.createElement("OPTION");
     const low = document.createElement("OPTION");
     const mid = document.createElement("OPTION");
     const high = document.createElement("OPTION");
 
-    priority.value = "priority";
-    priority.textContent = "priority";
-    priority.setAttribute("selected", "");
-    priority.setAttribute("disabled", "");
+    // priority.value = "priority";
+    // priority.textContent = "priority";
+    low.setAttribute("selected", "");
+    // priority.setAttribute("disabled", "");
 
     low.value = "low";
     low.textContent = "low";
@@ -51,12 +57,14 @@ function priorityList () {
     high.value = "high";
     high.textContent = "high";
 
-    select.appendChild(priority);
+    selectDiv.appendChild(selectLabel)
+    // select.appendChild(priority);
     select.appendChild(low);
     select.appendChild(mid);
     select.appendChild(high);
+    selectDiv.appendChild(select)
 
-    return select;
+    return selectDiv;
 }
 
 function task (arr) {
@@ -175,6 +183,7 @@ export function todoMini (title, arr) {
     //class
     todo.classList.add("todo");
     todoTitle.classList.add("todo-title");
+    titleDiv.classList.add("todo-title-div");
     TodoList.classList.add("todo-minilist");
     miniBtn.classList.add("mini-btn");
 
