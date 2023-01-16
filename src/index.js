@@ -2,7 +2,6 @@ import dom, {taskDom, todosMiniList, addTodoMini, todoMini} from "./dom";
 import { minDate } from "./dates";
 import {CreateList, tasksMain} from "./createTask";
 import { deleteTodoMini } from "./refresh";
-import "./style.css";
 
 
 let actualIndex = 0;
@@ -53,6 +52,7 @@ function addTaskFromInput () {
         
         if (d == "") {
             d = minDate;
+            console.log(d, minDate)
         }
 
         taskDom(addInput.value, d);
@@ -64,8 +64,7 @@ function addTaskFromInput () {
         last.classList.add(`priority-${p}`);
             // refresh minilist
         deleteTodoMini();
-        addTodoMini(tasksMain, sideTasksList);
-        refreshTodoMiniListeners();
+        addTodoMini(tasksMain, sideTasksList)
     }
     else {
         console.log("MMMMmmm ");
@@ -92,52 +91,6 @@ if (todoInput.value !== "") {
     // const todos = document.querySelectorAll(".todo-title-div h3");
     const todoListener = document.querySelector(".todo:last-of-type")
     const selectBtn = document.querySelectorAll(".mini-btn");
-    const lastSelectBtn = selectBtn[selectBtn.length -1];
-    const todosArr = Array.from(selectBtn);
-    
-
-    // selectBtn.forEach(btn => {
-    //             // add class and click event once
-    //     if (!btn.classList.contains("listener-btn")) {
-    //     btn.addEventListener("click", () => {
-    //         btn.classList.add("listener-btn");
-    //         actualIndex = todosArr.indexOf(btn)
-
-    //     })
-    //     }
-    // })
-    lastSelectBtn.addEventListener("click", (btn) => {
-        actualIndex = todosArr.indexOf(btn.target)
-        console.log(actualIndex)
-
-
-        while (mainContent.hasChildNodes()) {
-            mainContent.removeChild(mainContent.firstChild);
-            }
-
-        dom(tasksMain[actualIndex].name, tasksMain[actualIndex].tasks)
-        
-        const lastBtn = document.querySelector(".add-btn:last-of-type");
-        lastBtn.addEventListener("click", addTaskFromInput)
-    })
-
-        todoListener.addEventListener("click", (e) => {
-            const h3 = e.target.classList.contains("todo-title");
-
-            if (h3) {
-            e.target.classList.toggle("open-list");
-            console.log(h3)
-        }
-    })
-    todoInput.value = "";
-}
-}
-
-function refreshTodoMiniListeners () {
-
-
-    const todoListener = document.querySelectorAll(".todo")
-    const selectBtn = document.querySelectorAll(".mini-btn");
     const todosArr = Array.from(selectBtn);
     
 
@@ -160,14 +113,26 @@ function refreshTodoMiniListeners () {
         }
     })
 
-    todoListener.forEach(todo => {
-        todo.addEventListener("click", (e) => {
+    // todos.forEach(todo => {
+    //     // add class and click event once
+    //     if (!todo.classList.contains("listener")) {
+        todoListener.addEventListener("click", (e) => {
             const h3 = e.target.classList.contains("todo-title");
 
             if (h3) {
             e.target.classList.toggle("open-list");
             console.log(h3)
+            // actual = todosArr.indexOf(todo);
         }
     })
-    })
+    //     } else {
+    //         console.log("ups")
+    //     }
+    // })
+
+
+
+    
+    todoInput.value = "";
+}
 }
